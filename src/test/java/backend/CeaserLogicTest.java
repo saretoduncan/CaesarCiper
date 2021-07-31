@@ -13,7 +13,8 @@ class CeaserLogicTest {
     @Test
     void testForString_toCharArray() {
         CeaserLogic testceaser= new CeaserLogic("hello everyone");
-        char[] results="hello everyone".toCharArray();
+        String str="hello everyone".toUpperCase();
+        char[] results=str.toCharArray();
         assertArrayEquals(results, testceaser.getToArr());
     }
 }

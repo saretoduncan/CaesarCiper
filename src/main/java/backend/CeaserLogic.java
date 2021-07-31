@@ -1,5 +1,7 @@
 package backend;
 
+import java.util.Locale;
+
 public class CeaserLogic {
     private char[] toArr;
     private String word;
@@ -7,7 +9,8 @@ public class CeaserLogic {
 
 
     public CeaserLogic(String word) {
-      this.word= word;
+      this.word=  word.toUpperCase();
+
       this.toArr=this.word.toCharArray();
     }
 
