@@ -37,7 +37,7 @@ public class CeaserLogic {
 
                 encryptionIndex = index + this.key;
 
-                if (encryptionIndex <= 25) {
+                if (encryptionIndex < 26) {
                     finalIndex = encryptionIndex;
                 } else {
                     finalIndex = encryptionIndex % numberOfAlphabets;
@@ -52,7 +52,7 @@ public class CeaserLogic {
 
     }
     public String getDecord(){ //decryption method
-       StringBuilder decorded= new StringBuilder();//
+       StringBuilder decorded= new StringBuilder();
        int finalIndex;
        String encrypted= getEncoded();
        for(int i=0;i<encrypted.length();i++){
@@ -62,7 +62,7 @@ public class CeaserLogic {
                int decryptionIndex = index - this.key;
                if (decryptionIndex >= 0) {
                    finalIndex = decryptionIndex;
-               } else finalIndex = numberOfAlphabets - decryptionIndex;
+               } else  finalIndex = numberOfAlphabets + decryptionIndex;//decryptionIndex is negative(+-);
                decorded.append(letterOfAlphabet[finalIndex]);//append each character to decoder
            }else decorded.append(' ');
        }
