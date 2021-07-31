@@ -30,10 +30,11 @@ public class CeaserLogic {
          String message=getWord();
         for (int j = 0; j < message.length(); j++) {
             int finalIndex;
-            char strChar = message.charAt(j);
+            if(message.charAt(j)!=' ') {
+                char strChar = message.charAt(j);
 
-            int index = new String(letterOfAlphabet).indexOf(strChar);//index of each character in the alphabet array
-            if (index != -1) {
+                int index = new String(letterOfAlphabet).indexOf(strChar);//index of each character in the alphabet array
+
                 encryptionIndex = index + this.key;
 
                 if (encryptionIndex <= 25) {
@@ -42,7 +43,7 @@ public class CeaserLogic {
                     finalIndex = encryptionIndex % numberOfAlphabets;
                 }
                 encorded.append(this.letterOfAlphabet[finalIndex]);
-            }
+            }else encorded.append(' ');
         }
 
        return encorded.toString();// transform from string builder to a string
@@ -55,14 +56,15 @@ public class CeaserLogic {
        int finalIndex;
        String encrypted= getEncoded();
        for(int i=0;i<encrypted.length();i++){
-          char decryChar=encrypted.charAt(i);
-          int index= new String(letterOfAlphabet).indexOf(decryChar);
-          int decryptionIndex=index-this.key;
-          if(decryptionIndex>=0){
-              finalIndex=decryptionIndex;
-          }else finalIndex= numberOfAlphabets-decryptionIndex;
-          decorded.append(letterOfAlphabet[finalIndex]);//append each character to decoder
-
+           if(encrypted.charAt(i)!=' ') {
+               char decryChar = encrypted.charAt(i);
+               int index = new String(letterOfAlphabet).indexOf(decryChar);
+               int decryptionIndex = index - this.key;
+               if (decryptionIndex >= 0) {
+                   finalIndex = decryptionIndex;
+               } else finalIndex = numberOfAlphabets - decryptionIndex;
+               decorded.append(letterOfAlphabet[finalIndex]);//append each character to decoder
+           }else decorded.append(' ');
        }
        return decorded.toString();// transform from string builder to a string
     }
