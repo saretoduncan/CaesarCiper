@@ -24,4 +24,10 @@ class CeaserLogicTest {
 
         assertEquals("KHOO", testceaser.getEncoded());
     }
+
+    @Test
+    void decryptionTest() {
+        CeaserLogic testceaser= new CeaserLogic("hell",3);
+        assertEquals("HELL", testceaser.getDecord());
+    }
 }
