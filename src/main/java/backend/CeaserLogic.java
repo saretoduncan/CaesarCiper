@@ -15,9 +15,9 @@ public class CeaserLogic {
 
 
     public CeaserLogic(String word,int key) {
-      this.word=  word.toUpperCase();// change to uppercase
+        this.word=  word.toUpperCase();// change to uppercase
 
-      this.key=key;
+        this.key=key;
     }
 
     public String getWord() {
@@ -26,44 +26,46 @@ public class CeaserLogic {
 
     public String getEncoded() {//encryption method
         int encryptionIndex;
-         StringBuilder encorded= new StringBuilder();
-         String message=getWord();
+        StringBuilder encorded= new StringBuilder();
+        String message=getWord();
         for (int j = 0; j < message.length(); j++) {
             int finalIndex;
-            char strChar = message.charAt(j);
+            if(message.charAt(j)!=' ') {
+                char strChar = message.charAt(j);
 
-            int index = new String(letterOfAlphabet).indexOf(strChar);//index of each character in the alphabet array
-            if (index != -1) {
+                int index = new String(letterOfAlphabet).indexOf(strChar);//index of each character in the alphabet array
+
                 encryptionIndex = index + this.key;
 
-                if (encryptionIndex <= 25) {
+                if (encryptionIndex < 26) {
                     finalIndex = encryptionIndex;
                 } else {
                     finalIndex = encryptionIndex % numberOfAlphabets;
                 }
                 encorded.append(this.letterOfAlphabet[finalIndex]);
-            }
+            }else encorded.append(' ');
         }
 
-       return encorded.toString();// transform from string builder to a string
+        return encorded.toString();// transform from string builder to a string
 
 
 
     }
     public String getDecord(){ //decryption method
-       StringBuilder decorded= new StringBuilder();//
-       int finalIndex;
-       String encrypted= getEncoded();
-       for(int i=0;i<encrypted.length();i++){
-          char decryChar=encrypted.charAt(i);
-          int index= new String(letterOfAlphabet).indexOf(decryChar);
-          int decryptionIndex=index-this.key;
-          if(decryptionIndex>=0){
-              finalIndex=decryptionIndex;
-          }else finalIndex= numberOfAlphabets-decryptionIndex;
-          decorded.append(letterOfAlphabet[finalIndex]);//append each character to decoder
-
-       }
-       return decorded.toString();// transform from string builder to a string
+        StringBuilder decorded= new StringBuilder();
+        int finalIndex;
+        String encrypted= getEncoded();
+        for(int i=0;i<encrypted.length();i++){
+            if(encrypted.charAt(i)!=' ') {
+                char decryChar = encrypted.charAt(i);
+                int index = new String(letterOfAlphabet).indexOf(decryChar);
+                int decryptionIndex = index - this.key;
+                if (decryptionIndex >= 0) {
+                    finalIndex = decryptionIndex;
+                } else  finalIndex = numberOfAlphabets + decryptionIndex;//decryptionIndex is negative(+-);
+                decorded.append(letterOfAlphabet[finalIndex]);//append each character to decoder
+            }else decorded.append(' ');
+        }
+        return decorded.toString();// transform from string builder to a string
     }
 }
